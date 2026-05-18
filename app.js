@@ -257,4 +257,28 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // 12. Background Audio Toggle
+    const bgAudio = document.getElementById('bg-audio');
+    const soundToggle = document.getElementById('sound-toggle');
+    
+    if (bgAudio && soundToggle) {
+        const soundText = soundToggle.querySelector('.sound-text');
+        let isPlaying = false;
+
+        soundToggle.addEventListener('click', () => {
+            if (isPlaying) {
+                bgAudio.pause();
+                soundToggle.classList.remove('playing');
+                soundText.textContent = 'SOUND OFF';
+            } else {
+                bgAudio.play().catch(error => {
+                    console.log('Audio play failed:', error);
+                });
+                soundToggle.classList.add('playing');
+                soundText.textContent = 'SOUND ON';
+            }
+            isPlaying = !isPlaying;
+        });
+    }
 });
